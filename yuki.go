@@ -1,11 +1,10 @@
-package material
+package main
 
 import (
 	"log"
 	"strings"
 	"time"
 
-	"../utility"
 	"github.com/tealeg/xlsx"
 )
 
@@ -318,7 +317,7 @@ func ConversionYuki(filename string, inRecs [][]string, coRecs [][]string) {
 				cRec[7] = inRecs[J][7]
 
 				// 8.生年月日
-				cRec[8] = utility.WaToSeireki(inRecs[J][8])
+				cRec[8] = WaToSeireki(inRecs[J][8])
 
 				// 9.年齢
 				cRec[9] = inRecs[J][9]
@@ -597,16 +596,16 @@ func ConversionYuki(filename string, inRecs [][]string, coRecs [][]string) {
 				cRec[96] = inRecs[J][106]
 
 				// 97.有機_診察判定
-				cRec[97] = utility.Hantei(inRecs[J][107])
-				if utility.Hantei(inRecs[J][107]) == "err" {
+				cRec[97] = Hantei(inRecs[J][107])
+				if Hantei(inRecs[J][107]) == "err" {
 					log.Print("診察所見判定にエラーがあります。\r\n")
 				}
 				// 98.有機_診察判定コメント
 				cRec[98] = inRecs[J][108]
 
 				// 99.有機_尿蛋白判定
-				cRec[99] = utility.Hantei(inRecs[J][109])
-				if utility.Hantei(inRecs[J][109]) == "err" {
+				cRec[99] = Hantei(inRecs[J][109])
+				if Hantei(inRecs[J][109]) == "err" {
 					log.Print("尿蛋白判定にエラーがあります。\r\n")
 				}
 
@@ -614,8 +613,8 @@ func ConversionYuki(filename string, inRecs [][]string, coRecs [][]string) {
 				cRec[100] = inRecs[J][110]
 
 				// 101.有機_貧血判定
-				cRec[101] = utility.Hantei(inRecs[J][111])
-				if utility.Hantei(inRecs[J][111]) == "err" {
+				cRec[101] = Hantei(inRecs[J][111])
+				if Hantei(inRecs[J][111]) == "err" {
 					log.Print("貧血判定にエラーがあります。\r\n")
 				}
 
@@ -623,8 +622,8 @@ func ConversionYuki(filename string, inRecs [][]string, coRecs [][]string) {
 				cRec[102] = inRecs[J][112]
 
 				// 103.有機_肝機能判定
-				cRec[103] = utility.Hantei(inRecs[J][113])
-				if utility.Hantei(inRecs[J][113]) == "err" {
+				cRec[103] = Hantei(inRecs[J][113])
+				if Hantei(inRecs[J][113]) == "err" {
 					log.Print("肝機能判定にエラーがあります。\r\n")
 				}
 
@@ -655,20 +654,20 @@ func ConversionYuki(filename string, inRecs [][]string, coRecs [][]string) {
 				// 112.医療機関判定（有機）
 				sogo := ""
 				var h [7][2]string
-				h[0][0] = utility.Hantei(inRecs[J][107]) //診察所見判定
-				h[0][1] = inRecs[J][108]                 //診察所見所見
-				h[1][0] = utility.Hantei(inRecs[J][109]) //尿蛋白判定
-				h[1][1] = inRecs[J][110]                 //尿蛋白所見
-				h[2][0] = utility.Hantei(inRecs[J][111]) //貧血判定
-				h[2][1] = inRecs[J][112]                 //貧血所見
-				h[3][0] = utility.Hantei(inRecs[J][113]) //肝機能判定
-				h[3][1] = inRecs[J][114]                 //肝機能所見
-				h[4][0] = inRecs[J][115]                 //馬尿酸判定
-				h[4][1] = inRecs[J][116]                 //馬尿酸所見
-				h[5][0] = inRecs[J][117]                 //ﾒﾁﾙ馬尿酸判定
-				h[5][1] = inRecs[J][118]                 //ﾒﾁﾙ馬尿酸所見
-				h[6][0] = inRecs[J][119]                 //2.5ﾍｷｻﾝｼﾞｵﾝ判定
-				h[6][1] = inRecs[J][120]                 //2.5ﾍｷｻﾝｼﾞｵﾝ所見
+				h[0][0] = Hantei(inRecs[J][107]) //診察所見判定
+				h[0][1] = inRecs[J][108]         //診察所見所見
+				h[1][0] = Hantei(inRecs[J][109]) //尿蛋白判定
+				h[1][1] = inRecs[J][110]         //尿蛋白所見
+				h[2][0] = Hantei(inRecs[J][111]) //貧血判定
+				h[2][1] = inRecs[J][112]         //貧血所見
+				h[3][0] = Hantei(inRecs[J][113]) //肝機能判定
+				h[3][1] = inRecs[J][114]         //肝機能所見
+				h[4][0] = inRecs[J][115]         //馬尿酸判定
+				h[4][1] = inRecs[J][116]         //馬尿酸所見
+				h[5][0] = inRecs[J][117]         //ﾒﾁﾙ馬尿酸判定
+				h[5][1] = inRecs[J][118]         //ﾒﾁﾙ馬尿酸所見
+				h[6][0] = inRecs[J][119]         //2.5ﾍｷｻﾝｼﾞｵﾝ判定
+				h[6][1] = inRecs[J][120]         //2.5ﾍｷｻﾝｼﾞｵﾝ所見
 
 				hKigo := [...]string{"Ｆ", "Ｅ", "３", "Ｄ", "２", "Ｇ", "Ｃ"}
 				for k := 0; k < 7; k++ {
@@ -778,14 +777,14 @@ func ConversionYuki(filename string, inRecs [][]string, coRecs [][]string) {
 				cRec[119] = jyuji + jyujiWM
 
 				// 120.有機_診察判定
-				cRec[120] = utility.HanteiCode(inRecs[J][107])
-				if utility.HanteiCode(inRecs[J][107]) == "err" {
+				cRec[120] = HanteiCode(inRecs[J][107])
+				if HanteiCode(inRecs[J][107]) == "err" {
 					log.Print("診察判定にエラーがあります\r\n")
 				}
 
 				// 120.有機_診察判定結果
-				cRec[121] = utility.HanteiCode(inRecs[J][107])
-				if utility.HanteiCode(inRecs[J][107]) == "err" {
+				cRec[121] = HanteiCode(inRecs[J][107])
+				if HanteiCode(inRecs[J][107]) == "err" {
 					log.Print("診察結果にエラーがあります\r\n")
 				}
 

@@ -1,11 +1,10 @@
-package material
+package main
 
 import (
 	"log"
 	"strings"
 	"time"
 
-	"../utility"
 	"github.com/tealeg/xlsx"
 )
 
@@ -233,7 +232,7 @@ func ConversionCobalt(filename string, inRecs [][]string, coRecs [][]string, dat
 				cRec[7] = inRecs[J][7]
 
 				// 8.生年月日
-				cRec[8] = utility.WaToSeireki(inRecs[J][8])
+				cRec[8] = WaToSeireki(inRecs[J][8])
 
 				// 9.年齢
 				cRec[9] = inRecs[J][9]
@@ -359,8 +358,8 @@ func ConversionCobalt(filename string, inRecs [][]string, coRecs [][]string, dat
 				cRec[49] = inRecs[J][198]
 
 				// 50.ｺﾊﾞﾙﾄ_診察判定
-				cRec[50] = utility.Hantei(inRecs[J][199])
-				if utility.Hantei(inRecs[J][199]) == "err" {
+				cRec[50] = Hantei(inRecs[J][199])
+				if Hantei(inRecs[J][199]) == "err" {
 					log.Print("診察所見判定にエラーがあります。\r\n")
 				}
 
@@ -373,8 +372,8 @@ func ConversionCobalt(filename string, inRecs [][]string, coRecs [][]string, dat
 				// 53.医療機関判定（ｺﾊﾞﾙﾄ）
 				sogo := ""
 				var h [1][2]string
-				h[0][0] = utility.Hantei(inRecs[J][199]) //診察所見判定
-				h[0][1] = inRecs[J][200]                 //診察所見所見
+				h[0][0] = Hantei(inRecs[J][199]) //診察所見判定
+				h[0][1] = inRecs[J][200]         //診察所見所見
 
 				hKigo := [...]string{"Ｆ", "Ｅ", "３", "Ｄ", "２", "Ｇ", "Ｃ"}
 				for k := 0; k < 7; k++ {
@@ -460,8 +459,8 @@ func ConversionCobalt(filename string, inRecs [][]string, coRecs [][]string, dat
 				}
 
 				sagyoMin := ""
-				if inRecs[J][165] != "" {
-					sagyoMin = inRecs[J][165] + "分"
+				if inRecs[J][166] != "" {
+					sagyoMin = inRecs[J][166] + "分"
 				}
 
 				if sagyoHour != "" && sagyoMin != "" {
@@ -484,14 +483,14 @@ func ConversionCobalt(filename string, inRecs [][]string, coRecs [][]string, dat
 				cRec[61] = jyuji + jyujiWM
 
 				// 62.ｺﾊﾞﾙﾄ_診察判定
-				cRec[62] = utility.HanteiCode(inRecs[J][199])
-				if utility.HanteiCode(inRecs[J][199]) == "err" {
+				cRec[62] = HanteiCode(inRecs[J][199])
+				if HanteiCode(inRecs[J][199]) == "err" {
 					log.Print("診察判定にエラーがあります\r\n")
 				}
 
 				// 63.ｺﾊﾞﾙﾄ_管理区分
-				cRec[63] = utility.HanteiCode(inRecs[J][201])
-				if utility.HanteiCode(inRecs[J][201]) == "err" {
+				cRec[63] = HanteiCode(inRecs[J][201])
+				if HanteiCode(inRecs[J][201]) == "err" {
 					log.Print("管理区分にエラーがあります\r\n")
 				}
 

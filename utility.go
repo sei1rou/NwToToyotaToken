@@ -1,4 +1,4 @@
-package utility
+package main
 
 import (
 	"fmt"
@@ -68,6 +68,8 @@ func Hantei(s string) string {
 	case "Ｄ":
 		s = "Ｄ"
 	case "Ｅ":
+		s = "Ｅ"
+	case "Ｅ(1)":
 		s = "Ｅ"
 	case "Ｆ":
 		s = "Ｆ"

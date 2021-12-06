@@ -1,11 +1,10 @@
-package material
+package main
 
 import (
 	"log"
 	"strings"
 	"time"
 
-	"../utility"
 	"github.com/tealeg/xlsx"
 )
 
@@ -316,7 +315,7 @@ func ConversionChloroform(filename string, inRecs [][]string, coRecs [][]string,
 				cRec[7] = inRecs[J][7]
 
 				// 8.生年月日
-				cRec[8] = utility.WaToSeireki(inRecs[J][8])
+				cRec[8] = WaToSeireki(inRecs[J][8])
 
 				// 9.年齢
 				cRec[9] = inRecs[J][9]
@@ -486,8 +485,8 @@ func ConversionChloroform(filename string, inRecs [][]string, coRecs [][]string,
 				cRec[58] = inRecs[J][234]
 
 				// 59.ｸﾛﾛﾎﾙﾑ他_診察判定
-				cRec[59] = utility.Hantei(inRecs[J][235])
-				if utility.Hantei(inRecs[J][235]) == "err" {
+				cRec[59] = Hantei(inRecs[J][235])
+				if Hantei(inRecs[J][235]) == "err" {
 					log.Print("診察所見判定にエラーがあります。\r\n")
 				}
 
@@ -495,8 +494,8 @@ func ConversionChloroform(filename string, inRecs [][]string, coRecs [][]string,
 				cRec[60] = inRecs[J][236]
 
 				// 61.ｸﾛﾛﾎﾙﾑ他_尿蛋白判定
-				cRec[61] = utility.Hantei(inRecs[J][237])
-				if utility.Hantei(inRecs[J][237]) == "err" {
+				cRec[61] = Hantei(inRecs[J][237])
+				if Hantei(inRecs[J][237]) == "err" {
 					log.Print("尿蛋白判定にエラーがあります。\r\n")
 				}
 
@@ -504,8 +503,8 @@ func ConversionChloroform(filename string, inRecs [][]string, coRecs [][]string,
 				cRec[62] = inRecs[J][238]
 
 				// 63.ｸﾛﾛﾎﾙﾑ他_肝機能判定
-				cRec[63] = utility.Hantei(inRecs[J][239])
-				if utility.Hantei(inRecs[J][239]) == "err" {
+				cRec[63] = Hantei(inRecs[J][239])
+				if Hantei(inRecs[J][239]) == "err" {
 					log.Print("肝機能判定にエラーがあります。\r\n")
 				}
 
@@ -513,8 +512,8 @@ func ConversionChloroform(filename string, inRecs [][]string, coRecs [][]string,
 				cRec[64] = inRecs[J][240]
 
 				// 65.ｸﾛﾛﾎﾙﾑ他_白血球判定
-				cRec[65] = utility.Hantei(inRecs[J][241])
-				if utility.Hantei(inRecs[J][241]) == "err" {
+				cRec[65] = Hantei(inRecs[J][241])
+				if Hantei(inRecs[J][241]) == "err" {
 					log.Print("白血球判定にエラーがあります。\r\n")
 				}
 
@@ -522,8 +521,8 @@ func ConversionChloroform(filename string, inRecs [][]string, coRecs [][]string,
 				cRec[66] = inRecs[J][242]
 
 				// 67.ｸﾛﾛﾎﾙﾑ他_白血球像判定
-				cRec[67] = utility.Hantei(inRecs[J][243])
-				if utility.Hantei(inRecs[J][243]) == "err" {
+				cRec[67] = Hantei(inRecs[J][243])
+				if Hantei(inRecs[J][243]) == "err" {
 					log.Print("白血球像判定にエラーがあります。\r\n")
 				}
 
@@ -554,22 +553,22 @@ func ConversionChloroform(filename string, inRecs [][]string, coRecs [][]string,
 				// 76.医療機関判定（ｼﾞｸﾛﾛﾒﾀﾝｽﾁﾚﾝMIBK）
 				sogo := ""
 				var h [8][2]string
-				h[0][0] = utility.Hantei(inRecs[J][235]) //診察所見判定
-				h[0][1] = inRecs[J][236]                 //診察所見所見
-				h[1][0] = utility.Hantei(inRecs[J][237]) //尿蛋白判定
-				h[1][1] = inRecs[J][238]                 //尿蛋白所見
-				h[2][0] = utility.Hantei(inRecs[J][239]) //肝機能判定
-				h[2][1] = inRecs[J][240]                 //肝機能所見
-				h[3][0] = utility.Hantei(inRecs[J][241]) //白血球数判定
-				h[3][1] = inRecs[J][242]                 //白血球数所見
-				h[4][0] = utility.Hantei(inRecs[J][243]) //白血球像判定
-				h[4][1] = inRecs[J][244]                 //白血球像所見
-				h[5][0] = inRecs[J][245]                 //ジクロロメタン判定
-				h[5][1] = inRecs[J][246]                 //ジクロロメタン所見
-				h[6][0] = inRecs[J][247]                 //スチレン判定
-				h[6][1] = inRecs[J][248]                 //スチレン所見
-				h[7][0] = inRecs[J][249]                 //ﾒﾁﾙｲｿﾌﾞﾁﾙｹﾄﾝ判定
-				h[7][1] = inRecs[J][250]                 //ﾒﾁﾙｲｿﾌﾞﾁﾙｹﾄﾝ所見
+				h[0][0] = Hantei(inRecs[J][235]) //診察所見判定
+				h[0][1] = inRecs[J][236]         //診察所見所見
+				h[1][0] = Hantei(inRecs[J][237]) //尿蛋白判定
+				h[1][1] = inRecs[J][238]         //尿蛋白所見
+				h[2][0] = Hantei(inRecs[J][239]) //肝機能判定
+				h[2][1] = inRecs[J][240]         //肝機能所見
+				h[3][0] = Hantei(inRecs[J][241]) //白血球数判定
+				h[3][1] = inRecs[J][242]         //白血球数所見
+				h[4][0] = Hantei(inRecs[J][243]) //白血球像判定
+				h[4][1] = inRecs[J][244]         //白血球像所見
+				h[5][0] = inRecs[J][245]         //ジクロロメタン判定
+				h[5][1] = inRecs[J][246]         //ジクロロメタン所見
+				h[6][0] = inRecs[J][247]         //スチレン判定
+				h[6][1] = inRecs[J][248]         //スチレン所見
+				h[7][0] = inRecs[J][249]         //ﾒﾁﾙｲｿﾌﾞﾁﾙｹﾄﾝ判定
+				h[7][1] = inRecs[J][250]         //ﾒﾁﾙｲｿﾌﾞﾁﾙｹﾄﾝ所見
 
 				hKigo := [...]string{"Ｆ", "Ｅ", "３", "Ｄ", "２", "Ｇ", "Ｃ"}
 				for k := 0; k < 7; k++ {
@@ -794,32 +793,32 @@ func ConversionChloroform(filename string, inRecs [][]string, coRecs [][]string,
 				cRec[88] = jyuji + jyujiWM
 
 				// 89.ｸﾛﾛﾎﾙﾑ他_白血球像判定
-				cRec[89] = utility.HanteiCode(inRecs[J][243])
-				if utility.HanteiCode(inRecs[J][243]) == "err" {
+				cRec[89] = HanteiCode(inRecs[J][243])
+				if HanteiCode(inRecs[J][243]) == "err" {
 					log.Print("白血球像判定にエラーがあります\r\n")
 				}
 
 				// 90.ｸﾛﾛﾎﾙﾑ他_診察判定
-				cRec[90] = utility.HanteiCode(inRecs[J][235])
-				if utility.HanteiCode(inRecs[J][235]) == "err" {
+				cRec[90] = HanteiCode(inRecs[J][235])
+				if HanteiCode(inRecs[J][235]) == "err" {
 					log.Print("診察所見判定にエラーがあります\r\n")
 				}
 
 				// 91.ジクロロメタン判定
-				cRec[91] = utility.HanteiCode(inRecs[J][245])
-				if utility.HanteiCode(inRecs[J][245]) == "err" {
+				cRec[91] = HanteiCode(inRecs[J][245])
+				if HanteiCode(inRecs[J][245]) == "err" {
 					log.Print("ジクロロメタン判定にエラーがあります\r\n")
 				}
 
 				// 92.スチレン判定
-				cRec[92] = utility.HanteiCode(inRecs[J][247])
-				if utility.HanteiCode(inRecs[J][247]) == "err" {
+				cRec[92] = HanteiCode(inRecs[J][247])
+				if HanteiCode(inRecs[J][247]) == "err" {
 					log.Print("スチレン判定にエラーがあります\r\n")
 				}
 
 				// 93.メチルイソブチルケトン判定
-				cRec[93] = utility.HanteiCode(inRecs[J][249])
-				if utility.HanteiCode(inRecs[J][249]) == "err" {
+				cRec[93] = HanteiCode(inRecs[J][249])
+				if HanteiCode(inRecs[J][249]) == "err" {
 					log.Print("メチルイソブチルケトン判定にエラーがあります\r\n")
 				}
 
@@ -827,14 +826,14 @@ func ConversionChloroform(filename string, inRecs [][]string, coRecs [][]string,
 				// 95.医療機関判定（ｼﾞｸﾛﾛﾒﾀﾝｽﾁﾚﾝMIBK）
 				sogow := 0
 				var hw [8]int
-				hw[0] = utility.HanteiWeight(inRecs[J][235]) //診察所見判定
-				hw[1] = utility.HanteiWeight(inRecs[J][237]) //尿蛋白判定
-				hw[2] = utility.HanteiWeight(inRecs[J][239]) //肝機能判定
-				hw[3] = utility.HanteiWeight(inRecs[J][241]) //白血球数判定
-				hw[4] = utility.HanteiWeight(inRecs[J][243]) //白血球像判定
-				hw[5] = utility.HanteiWeight(inRecs[J][245]) //ジクロロメタン判定
-				hw[6] = utility.HanteiWeight(inRecs[J][247]) //スチレン判定
-				hw[7] = utility.HanteiWeight(inRecs[J][249]) //ﾒﾁﾙｲｿﾌﾞﾁﾙｹﾄﾝ判定
+				hw[0] = HanteiWeight(inRecs[J][235]) //診察所見判定
+				hw[1] = HanteiWeight(inRecs[J][237]) //尿蛋白判定
+				hw[2] = HanteiWeight(inRecs[J][239]) //肝機能判定
+				hw[3] = HanteiWeight(inRecs[J][241]) //白血球数判定
+				hw[4] = HanteiWeight(inRecs[J][243]) //白血球像判定
+				hw[5] = HanteiWeight(inRecs[J][245]) //ジクロロメタン判定
+				hw[6] = HanteiWeight(inRecs[J][247]) //スチレン判定
+				hw[7] = HanteiWeight(inRecs[J][249]) //ﾒﾁﾙｲｿﾌﾞﾁﾙｹﾄﾝ判定
 
 				for k := 0; k < 8; k++ {
 					if sogow < hw[k] {
@@ -842,8 +841,8 @@ func ConversionChloroform(filename string, inRecs [][]string, coRecs [][]string,
 					}
 				}
 
-				cRec[94] = utility.WeightToHantei(sogow)
-				cRec[95] = utility.WeightToHanteiCode(sogow)
+				cRec[94] = WeightToHantei(sogow)
+				cRec[95] = WeightToHanteiCode(sogow)
 
 				//writer.Write(cRec)
 				row = sheet.AddRow()

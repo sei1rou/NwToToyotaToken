@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/csv"
-	"errors"
 	"flag"
 	"fmt"
 	"io"
@@ -12,11 +11,11 @@ import (
 	"strconv"
 	"time"
 
-	"./material"
 	"golang.org/x/text/encoding/japanese"
 	"golang.org/x/text/transform"
 )
 
+/*
 func failOnError(err error) {
 	if err != nil {
 		log.Fatal("Error:", err)
@@ -26,6 +25,7 @@ func failOnError(err error) {
 func doError() error {
 	return errors.New("エラーが発生しました。")
 }
+*/
 
 func main() {
 	// ログファイル準備
@@ -60,16 +60,19 @@ func main() {
 	outDir := dirCreate(flag.Arg(0))
 
 	// 有機溶剤データの変換
-	material.ConversionYuki(outDir, records, coRecods)
+	ConversionYuki(outDir, records, coRecods)
 
 	// クロロホルム他物質データの変換（ジクロロ他）
-	material.ConversionChloroform(outDir, records, coRecods, recordsEnddate)
+	ConversionChloroform(outDir, records, coRecods, recordsEnddate)
 
 	// コバルトデータの変換
-	material.ConversionCobalt(outDir, records, coRecods, recordsEnddate)
+	ConversionCobalt(outDir, records, coRecods, recordsEnddate)
 
 	// エチルベンゼンデータの変換
-	material.ConversionEthylbenzene(outDir, records, coRecods, recordsEnddate)
+	ConversionEthylbenzene(outDir, records, coRecods, recordsEnddate)
+
+	// 溶接ヒュームデータの変換
+	ConversionWeldingfume(outDir, records, coRecods, recordsEnddate)
 
 	log.Print("Finish !\r\n")
 
@@ -115,10 +118,7 @@ func coSurvey(records [][]string) [][]string {
 		{"2000100100000002", "東京トヨタ自動車（株）", "0"},
 		{"2000100100000003", "東京トヨペット（株）", "0"},
 		{"2000100100000006", "ネッツトヨタ東京（株）", "0"},
-		{"2000100100000011", "東京トヨタカーライフサービス（株）", "0"},
-		{"2000100100000026", "ティーシーサービス（株）", "0"},
-		{"2000100100009002", "トヨタ東京カローラ（株）", "0"},
-		{"2000100100009004", "（株）センチュリーサービス", "0"},
+		{"2000100100000020", "ＴＭプロサービス（株）", "0"},
 	}
 
 	coRecMax := len(records)
@@ -196,7 +196,7 @@ func filecheck(f1 string, f2 string) (string, string) {
 
 	//タイトルチェック
 	fcheck := false
-	fhead := []string{"社員番号", "フリガナ", "氏名", "生年月日", "エチルベンゼン取扱い終了年月日", "コバルト取扱い終了年月日", "ジクロロメタン取扱い終了年月日", "スチレン取扱い終了年月日", "MIBK取扱い終了年月日"}
+	fhead := []string{"社員番号", "フリガナ", "氏名", "生年月日", "エチルベンゼン取扱い終了年月日", "コバルト取扱い終了年月日", "ジクロロメタン取扱い終了年月日", "スチレン取扱い終了年月日", "MIBK取扱い終了年月日", "アーク溶接取扱い終了年月日"}
 	for i, _ := range fhead {
 		if readEnddate[i] != fhead[i] {
 			fcheck = true
@@ -205,7 +205,7 @@ func filecheck(f1 string, f2 string) (string, string) {
 
 	if fcheck {
 		log.Print("ファイルのタイトルが違います\r\n")
-		log.Print("社員番号, フリガナ, 氏名, 生年月日, エチルベンゼン取扱い終了年月日, コバルト取扱い終了年月日, ジクロロメタン取扱い終了年月日, スチレン取扱い終了年月日, MIBK取扱い終了年月日\r\n")
+		log.Print("社員番号, フリガナ, 氏名, 生年月日, エチルベンゼン取扱い終了年月日, コバルト取扱い終了年月日, ジクロロメタン取扱い終了年月日, スチレン取扱い終了年月日, MIBK取扱い終了年月日,アーク溶接取扱い終了年月日\r\n")
 		failOnError(doError())
 	}
 
