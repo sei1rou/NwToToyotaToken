@@ -13,6 +13,7 @@ func ConversionWeldingfume(filename string, inRecs [][]string, coRecs [][]string
 	var vcell *xlsx.Cell
 	var r int
 	var cell string
+	wpos := 276 //　溶接フュームのスタート位置
 
 	recLen := 61 //出力するレコードの項目数
 	cRec := make([]string, recLen)
@@ -191,7 +192,7 @@ func ConversionWeldingfume(filename string, inRecs [][]string, coRecs [][]string
 				cRec[I] = ""
 			}
 
-			if inRecs[J][0] == coRec[0] && inRecs[J][275] == "●" { //溶接ヒュームを受診しているか確認
+			if inRecs[J][0] == coRec[0] && inRecs[J][wpos] == "●" { //溶接ヒュームを受診しているか確認
 				// 社員番号の桁数確認
 				if len(inRecs[J][4]) != 10 {
 					log.Printf("社員番号が10桁ではありません:%v\r\n", inRecs[J][4])
@@ -233,127 +234,127 @@ func ConversionWeldingfume(filename string, inRecs [][]string, coRecs [][]string
 				cRec[11] = inRecs[J][11]
 
 				// 12.◆特化金属アーク溶接作業等
-				cRec[12] = inRecs[J][275]
+				cRec[12] = inRecs[J][wpos]
 
 				// 13.作業名
-				cRec[13] = inRecs[J][276]
+				cRec[13] = inRecs[J][wpos+1]
 
 				// 14.従事年
-				cRec[14] = inRecs[J][277]
+				cRec[14] = inRecs[J][wpos+2]
 
 				// 15.従事月
-				cRec[15] = inRecs[J][278]
+				cRec[15] = inRecs[J][wpos+3]
 
 				// 16.作業時間
-				cRec[16] = inRecs[J][279]
+				cRec[16] = inRecs[J][wpos+4]
 
 				// 17.分
-				cRec[17] = inRecs[J][280]
+				cRec[17] = inRecs[J][wpos+5]
 
 				// 18.作業日数
-				cRec[18] = inRecs[J][281]
+				cRec[18] = inRecs[J][wpos+6]
 
 				// 19.作業日数(週・月)
-				cRec[19] = inRecs[J][282]
+				cRec[19] = inRecs[J][wpos+7]
 
 				// 20.作業工程に変化
-				cRec[20] = inRecs[J][283]
+				cRec[20] = inRecs[J][wpos+8]
 
 				// 21.全体換気装置
-				cRec[21] = inRecs[J][284]
+				cRec[21] = inRecs[J][wpos+9]
 
 				// 22.保護マスク
-				cRec[22] = inRecs[J][285]
+				cRec[22] = inRecs[J][wpos+10]
 
 				// 23.取扱量・使用頻度
-				cRec[23] = inRecs[J][286]
+				cRec[23] = inRecs[J][wpos+11]
 
 				// 24.大量のばく露
-				cRec[24] = inRecs[J][287]
+				cRec[24] = inRecs[J][wpos+12]
 
 				// 25.直接触れる作業
-				cRec[25] = inRecs[J][288]
+				cRec[25] = inRecs[J][wpos+13]
 
 				// 26.握力右
-				cRec[26] = inRecs[J][289]
+				cRec[26] = inRecs[J][wpos+14]
 
 				// 27.握力左
-				cRec[27] = inRecs[J][290]
+				cRec[27] = inRecs[J][wpos+15]
 
 				// 28.せき
-				cRec[28] = inRecs[J][291]
+				cRec[28] = inRecs[J][wpos+16]
 
 				// 29.たん
-				cRec[29] = inRecs[J][292]
+				cRec[29] = inRecs[J][wpos+17]
 
 				// 30.よだれがでる
-				cRec[30] = inRecs[J][293]
+				cRec[30] = inRecs[J][wpos+18]
 
 				// 31.発汗異常
-				cRec[31] = inRecs[J][294]
+				cRec[31] = inRecs[J][wpos+19]
 
 				// 32.手指のふるえ
-				cRec[32] = inRecs[J][295]
+				cRec[32] = inRecs[J][wpos+20]
 
 				// 33.字が書きにくい
-				cRec[33] = inRecs[J][296]
+				cRec[33] = inRecs[J][wpos+21]
 
 				// 34.握力低下感
-				cRec[34] = inRecs[J][297]
+				cRec[34] = inRecs[J][wpos+22]
 
 				// 35.歩行障害
-				cRec[35] = inRecs[J][298]
+				cRec[35] = inRecs[J][wpos+23]
 
 				// 36.自覚症状１
-				cRec[36] = inRecs[J][299]
+				cRec[36] = inRecs[J][wpos+24]
 
 				// 37.自覚症状２
-				cRec[37] = inRecs[J][300]
+				cRec[37] = inRecs[J][wpos+25]
 
 				// 38.自覚症状３
-				cRec[38] = inRecs[J][301]
+				cRec[38] = inRecs[J][wpos+26]
 
 				// 39.既往歴１
-				cRec[39] = inRecs[J][302]
+				cRec[39] = inRecs[J][wpos+27]
 
 				// 40.既往歴２
-				cRec[40] = inRecs[J][303]
+				cRec[40] = inRecs[J][wpos+28]
 
 				// 41.既往歴３
-				cRec[41] = inRecs[J][304]
+				cRec[41] = inRecs[J][wpos+29]
 
 				// 42.パーキンソン症候群様症状
-				cRec[42] = inRecs[J][305]
+				cRec[42] = inRecs[J][wpos+30]
 
 				// 43.診察所見１
-				cRec[43] = inRecs[J][306]
+				cRec[43] = inRecs[J][wpos+31]
 
 				// 44.診察所見２
-				cRec[44] = inRecs[J][307]
+				cRec[44] = inRecs[J][wpos+32]
 
 				// 45.診察所見３
-				cRec[45] = inRecs[J][308]
+				cRec[45] = inRecs[J][wpos+33]
 
 				// 46.溶接フューム_診察判定
-				cRec[46] = Hantei(inRecs[J][309])
-				if Hantei(inRecs[J][309]) == "err" {
+				cRec[46] = Hantei(inRecs[J][wpos+34])
+				if Hantei(inRecs[J][wpos+34]) == "err" {
 					log.Print("診察所見判定にエラーがあります。\r\n")
 				}
 
 				// 47.溶接フューム_診察判定コメント
-				cRec[47] = inRecs[J][310]
+				cRec[47] = inRecs[J][wpos+35]
 
 				// 48.管理区分
-				cRec[48] = inRecs[J][311]
+				cRec[48] = inRecs[J][wpos+36]
 
 				// 49.管理区分コメント
-				cRec[49] = inRecs[J][312]
+				cRec[49] = inRecs[J][wpos+37]
 
 				// 50.医療機関判定（溶接ヒューム）
 				sogo := ""
 				var h [1][2]string
-				h[0][0] = Hantei(inRecs[J][309]) //診察所見判定
-				h[0][1] = inRecs[J][310]         //診察所見所見
+				h[0][0] = Hantei(inRecs[J][wpos+34]) //診察所見判定
+				h[0][1] = inRecs[J][wpos+35]         //診察所見所見
 
 				hKigo := [...]string{"Ｆ", "Ｅ", "３", "Ｄ", "２", "Ｇ", "Ｃ"}
 				for k := 0; k < 7; k++ {
@@ -388,13 +389,13 @@ func ConversionWeldingfume(filename string, inRecs [][]string, coRecs [][]string
 
 				// 55.アーク溶接_従事年数
 				jyujiYear := ""
-				if inRecs[J][277] != "" {
-					jyujiYear = inRecs[J][277] + "年"
+				if inRecs[J][wpos+2] != "" {
+					jyujiYear = inRecs[J][wpos+2] + "年"
 				}
 
 				jyujiMon := ""
-				if inRecs[J][278] != "" {
-					jyujiMon = inRecs[J][278] + "ヵ月"
+				if inRecs[J][wpos+3] != "" {
+					jyujiMon = inRecs[J][wpos+3] + "ヵ月"
 				}
 
 				if jyujiYear != "" && jyujiMon != "" {
@@ -434,13 +435,13 @@ func ConversionWeldingfume(filename string, inRecs [][]string, coRecs [][]string
 
 				// 57.アーク溶接_作業時間
 				sagyoHour := ""
-				if inRecs[J][279] != "" {
-					sagyoHour = inRecs[J][279] + "時間"
+				if inRecs[J][wpos+4] != "" {
+					sagyoHour = inRecs[J][wpos+4] + "時間"
 				}
 
 				sagyoMin := ""
-				if inRecs[J][280] != "" {
-					sagyoMin = inRecs[J][280] + "分"
+				if inRecs[J][wpos+5] != "" {
+					sagyoMin = inRecs[J][wpos+5] + "分"
 				}
 
 				if sagyoHour != "" && sagyoMin != "" {
@@ -451,26 +452,26 @@ func ConversionWeldingfume(filename string, inRecs [][]string, coRecs [][]string
 
 				// 58._アーク溶接従事日数_週月
 				jyuji := ""
-				if inRecs[J][281] != "" {
-					jyuji = inRecs[J][281] + "日"
+				if inRecs[J][wpos+6] != "" {
+					jyuji = inRecs[J][wpos+6] + "日"
 				}
 
 				jyujiWM := ""
-				if inRecs[J][282] != "" {
-					jyujiWM = "/" + inRecs[J][282]
+				if inRecs[J][wpos+7] != "" {
+					jyujiWM = "/" + inRecs[J][wpos+7]
 				}
 
 				cRec[58] = jyuji + jyujiWM
 
 				// 59.アーク溶接_診察判定
-				cRec[59] = HanteiCode(inRecs[J][309])
-				if HanteiCode(inRecs[J][309]) == "err" {
+				cRec[59] = HanteiCode(inRecs[J][wpos+34])
+				if HanteiCode(inRecs[J][wpos+34]) == "err" {
 					log.Print("診察判定にエラーがあります\r\n")
 				}
 
 				// 60.アーク溶接_管理区分
-				cRec[60] = HanteiCode(inRecs[J][311])
-				if HanteiCode(inRecs[J][311]) == "err" {
+				cRec[60] = HanteiCode(inRecs[J][wpos+36])
+				if HanteiCode(inRecs[J][wpos+36]) == "err" {
 					log.Print("管理区分にエラーがあります\r\n")
 				}
 
